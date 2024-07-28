@@ -1,15 +1,25 @@
-import React, { useEffect } from 'react'
+'use client';
+import React, { useEffect } from 'react';
 
-const fetchData = async () =>{
-  await  fetch("https://localhost:8080/api/user").then((res)=>{
-    
-  })
-    
+function Page() {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/api/user');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  return <div>Page</div>;
 }
 
-export default  async function page() {
-    
-  return (
-    <div>page</div>
-  )
-}
+export default Page;
